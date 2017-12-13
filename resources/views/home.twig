@@ -1,0 +1,41 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    <h1>All Customers Listing</h1>
+    <div><a href="{{base_url}}/customers/add" class="btn btn-primary btn-lg btn-block">Add New Customer</a></div>
+    <span class="input-xlarge  buttton-block uneditable-input"> test</span>
+    <div class="bs-example">
+        <pre>test  {{ data }} </pre>
+        {% if data %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th colspan="2" align="center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                {% for row in data %}
+                    <tr>
+                        <td><span class="input-xlarge uneditable-input">{{ row.id }}</span></td>
+                        <td>{{ row.name }}</td>
+                        <td><a href="#" class="btn btn-info">Edit</a></td>
+                        <td>
+                            <form action="{{base_url}}/customers" method="POST">
+                                <input class="btn btn-danger" type = "submit" value ="Delete">
+                                <input type="hidden" id="delete" name="delete" value="1">
+                                <input type="hidden" id="customer_id" name="customer_id" value="{{row.customer_id}}">
+                            </form>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            {% else %}
+                <p>No records found</p>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
